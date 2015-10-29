@@ -30,6 +30,15 @@ class HomeViewController: UIViewController, UITableViewDataSource, UITableViewDe
         self.getAccount()
     }
     
+    
+    override func viewWillAppear(animated: Bool) {
+        self.tableView.estimatedRowHeight = UITableViewAutomaticDimension
+        self.tableView.rowHeight = UITableViewAutomaticDimension
+
+    }
+    
+   
+    
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
     }
@@ -63,16 +72,16 @@ class HomeViewController: UIViewController, UITableViewDataSource, UITableViewDe
         
         detailTweet = tweets[indexPath.row]
         
-        func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
-            if segue.identifier == "showTweet"
-            {
-                if let destinationVC = segue.destinationViewController as? DetailViewController{
-                    destinationVC.tweet = detailTweet
-                }
+        
+    }
+    
+    override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
+        if segue.identifier == "showTweet"
+        {
+            if let destinationVC = segue.destinationViewController as? DetailViewController{
+                destinationVC.tweet = detailTweet
             }
         }
-        
-        
     }
     
     

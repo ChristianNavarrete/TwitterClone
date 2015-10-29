@@ -34,6 +34,7 @@
 
 /* Begin PBXFileReference section */
 		A99404ED1BE18FDF00583A52 /* DetailViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DetailViewController.swift; sourceTree = "<group>"; };
+		A99404EF1BE1D70E00583A52 /* CodeChallenges.playground */ = {isa = PBXFileReference; lastKnownFileType = file.playground; path = CodeChallenges.playground; sourceTree = "<group>"; };
 		A9E80F291BDEBF29004B56C1 /* TwitterCF.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = TwitterCF.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		A9E80F2D1BDEBF29004B56C1 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		A9E80F2E1BDEBF29004B56C1 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
@@ -137,6 +138,7 @@
 				A9E80F501BDEC2F4004B56C1 /* TweetJSONParser.swift */,
 				A9E80F4E1BDEC227004B56C1 /* Tweet.swift */,
 				A9F8D14A1BE038E000E1F8CB /* User.swift */,
+				A99404EF1BE1D70E00583A52 /* CodeChallenges.playground */,
 			);
 			name = Models;
 			sourceTree = "<group>";
