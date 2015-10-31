@@ -7,6 +7,7 @@
 //
 
 import Foundation
+import UIKit
 
 
 
@@ -14,6 +15,7 @@ class User {
     
     let username: String
     let profileImageURL: String
+    var image : UIImage?
     
     init(username: String, profileImageURL:String) {
         

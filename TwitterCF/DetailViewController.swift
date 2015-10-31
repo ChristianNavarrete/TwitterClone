@@ -19,16 +19,20 @@ class DetailViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+        if let _ = self.tweet?.retweetStatus {
+            // use rettweet details
+            tweetLabel.text = tweet?.rqText
+            usernameLabel.text = tweet?.rqUser?.username
+            
+        } else {
+            // use normal tweet details
+            tweetLabel.text = tweet?.text
+            usernameLabel.text = tweet?.user?.username
+        }
 
-        // Do any additional setup after loading the view.
-        tweetLabel.text = tweet?.text
-        usernameLabel.text = tweet?.user?.username
-    }
-    
-
-
-    override func viewDidDisappear(animated: Bool) {
-        self.tweet = nil
+        
+        
     }
     
     

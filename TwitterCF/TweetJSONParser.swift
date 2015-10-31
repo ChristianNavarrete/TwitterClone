@@ -18,40 +18,75 @@ class TweetJSONParser {
             
             if let rootObject = try NSJSONSerialization.JSONObjectWithData(json, options:
                 NSJSONReadingOptions.MutableContainers) as? [[String : AnyObject]]  {
-                
-                print(rootObject)
-                
-                var tweets = [Tweet]()
-                
-                // How are the tweetObjects divided inside the JSON, how does it know where to cut off, why doesnt it give the first tweet everytime ? Because we're setting the perameter types as [[String : AnyObject]] in NSJSONSerialization.JSONObjectWithData
+                                        
+                    var tweets = [Tweet]()
                     
-                for tweetObject in rootObject {
-                    
-                    if let text = tweetObject["text"] as? String, id  = tweetObject["id_str"] as? String, user = tweetObject["user"] as? [String:AnyObject]
+                    for tweetObject in rootObject {
                         
-                        {
-                            let tweet = Tweet(text: text, id: id)
+                        if let text = tweetObject["text"] as? String,  id = tweetObject["id_str"] as? String, user = tweetObject["user"] as? [String: AnyObject] {
                             
-                            if let name = user["name"] as? String, profileImageURL = user["profile_image_url"] as? String {
-                                tweet.user = User(username: name, profileImageURL: profileImageURL)
+                            let isRetweet = self.isRetweeted(tweetObject)
+                            
+                            if isRetweet.0 == true {
+                                if let retweetObject = isRetweet.1 {
+                                    if let retweetText = retweetObject["text"] as? String, retweetUser = retweetObject["user"] as? [String: AnyObject] {
+                                        
+                                        if let retweetUser = self.userFromData(retweetUser), user = userFromData(user) {
+                                            
+                                            let tweet = Tweet(text: text, rqText: retweetText, id: id, user: user, rqUser: retweetUser, isRetweet: true)
+                                            tweets.append(tweet)
+                                            
+                                        }
+                                    }
+                                    
+                                }
+                            } else {
+                                
+                                let tweet = Tweet(text: text, id: id)
+                                
+                                
+                                if let user = self.userFromData(user) {
+                                    tweet.user = user
+                                    tweets.append(tweet)
+                                }
+                                
+                            }
+                            
+                            
+                            
                         }
-                            
-                            tweets.append(tweet)
-                            
-                        }
-                    } 
-                
-                return tweets
+                        
+                    }
+                    
+                    return tweets
             }
             
-        } catch _ {}
+        } catch _ {
+            
+            return nil
+            
+        }
         
         return nil
     }
     
     
-    class func userFromData(user:[String:AnyObject]) -> User? {
     
+    class func isRetweeted(tweetObject: [ String: AnyObject]) -> (Bool, [String:AnyObject]?) {
+        
+        if let retweetObject = tweetObject["retweeted_status"] as? [String : AnyObject] {
+            if let _ = retweetObject["text"] as? String, _ = retweetObject["name"] as? [String: AnyObject] {
+                return (true,retweetObject)
+            }
+        }
+        
+        return (false, nil)
+    }
+    
+    
+    
+    class func userFromData(user:[String:AnyObject]) -> User? {
+        
         if let name = user["name"] as? String, profileImageURL = user["profile_image_url"] as? String {
             
             return User(username: name, profileImageURL: profileImageURL)
@@ -64,3 +99,7 @@ class TweetJSONParser {
     
     
 }
+
+
+
+                                        

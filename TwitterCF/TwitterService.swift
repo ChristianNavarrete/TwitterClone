@@ -87,13 +87,16 @@ class TwitterService {
     
     
     
+    typealias TweetsCompletion = (String?, [Tweet]?) -> ()
     
     
-    
-    class func tweetsFromHomeTimeline(completion: (String?, [Tweet]?) -> () ) {
+    class func tweetsFromHomeTimeline(completion: TweetsCompletion) {
+        
+        var param = [String:AnyObject]()
+        param["count"] = 4
         
         //in this request we're going to grab the users home timeline
-        let request = SLRequest(forServiceType: SLServiceTypeTwitter, requestMethod: .GET, URL:NSURL(string:"https://api.twitter.com/1.1/statuses/home_timeline.json"), parameters: nil)
+        let request = SLRequest(forServiceType: SLServiceTypeTwitter, requestMethod: .GET, URL:NSURL(string:"https://api.twitter.com/1.1/statuses/home_timeline.json"), parameters: param)
         
         if let account = self.sharedService.account {
             
@@ -113,8 +116,12 @@ class TwitterService {
                 
                 switch response.statusCode {
                 case 200...299:
+                    
                     let tweets = TweetJSONParser.tweetFromJSONData(data)
-                    completion(nil, tweets)
+                    NSOperationQueue.mainQueue().addOperationWithBlock({ () -> Void in
+                        completion(nil, tweets)
+                    })
+                    
                 case 400...499:
                 completion("ERROR: SLRequest type GET for /1.1/statuses/home_timeline.json returned status code \(response.statusCode) [user input error].", nil)
                 case 500...599:
@@ -128,16 +135,6 @@ class TwitterService {
 
         }
         
-
-        
     }
-    
-    
-
-        
-
-    
-    
-    
     
 }
