@@ -71,8 +71,7 @@ class HomeViewController: UIViewController, UITableViewDataSource, UITableViewDe
         self.detailTweet = tweets[indexPath.row]
         
         self.performSegueWithIdentifier("showTweet", sender: self)
-        
-        
+
         
         
     }

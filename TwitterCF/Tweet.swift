@@ -19,7 +19,6 @@ class Tweet {
     let rqText:String?
     let rqUser:User?
     let isRetweeted: Bool
-    var retweetStatus:Tweet?
 
     
     init(text: String, rqText: String? = nil, id: String?, user: User? = nil, rqUser: User? = nil, isRetweet:Bool = false) {

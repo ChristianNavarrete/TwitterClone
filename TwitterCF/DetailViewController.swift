@@ -10,7 +10,7 @@ import UIKit
 
 class DetailViewController: UIViewController {
     
-    var tweet:Tweet?
+    var tweet:Tweet!
 
     @IBOutlet weak var tweetLabel: UILabel!
     @IBOutlet weak var usernameLabel: UILabel!
@@ -20,14 +20,21 @@ class DetailViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        if let _ = self.tweet?.retweetStatus {
-            // use rettweet details
-            tweetLabel.text = tweet?.rqText
-            usernameLabel.text = tweet?.rqUser?.username
+        if self.tweet.isRetweeted {
+            
+            tweetLabel.text = self.tweet.rqText
+            usernameLabel.text = self.tweet.rqUser!.username
+            
+            if let rqUser = self.tweet.rqUser {
+                self.navigationItem.title = rqUser.username
+                return
+            } else {
+                self.navigationItem.title = tweet.user?.username
+            }
             
         } else {
             // use normal tweet details
-            tweetLabel.text = tweet?.text
+            tweetLabel.text = tweet.text
             usernameLabel.text = tweet?.user?.username
         }
 
