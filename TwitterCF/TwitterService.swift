@@ -137,4 +137,53 @@ class TwitterService {
         
     }
     
+    
+    class func grabFollowerTweets(userID: Int, completion:(String?, [Tweet]?) -> ()) {
+        
+        var param = [String:AnyObject]()
+        
+        param["user_id"] = "\(userID)"
+        
+        //in this request we're going to grab the users home timeline
+        if let request = SLRequest(forServiceType: SLServiceTypeTwitter, requestMethod: .GET, URL:NSURL(string:"https://api.twitter.com/1.1/statuses/user_timeline.json"), parameters: param) {
+            
+            if let account = TwitterService.sharedService.account {
+            
+            request.account = account
+            
+            request.performRequestWithHandler({ (data, response, error) -> Void in
+                
+                if let error = error {
+                    print(error.description)
+                    completion("SLRequest Error type .GET for .json timeline, could not retrieve", nil); return
+                    
+                }
+                
+                switch response.statusCode {
+                case 200...299:
+                    let tweets = TweetJSONParser.tweetFromJSONData(data)
+                    NSOperationQueue.mainQueue().addOperationWithBlock({ () -> Void in
+                        completion(nil, tweets)
+                    })
+                case 400...499:
+                    completion("ERROR: SLRequest type GET for /1.1/statuses/home_timeline.json returned status code \(response.statusCode) [user input error].", nil)
+                case 500...599:
+                    completion("ERROR: SLRequest type GET for /1.1/statuses/home_timeline.json returned status code \(response.statusCode) [server side error].", nil)
+                default:
+                    completion("ERROR: SLRequest type GET for /1.1/statuses/home_timeline.json returned status code \(response.statusCode) [unknown error].", nil)
+
+                }
+                
+                
+                
+                
+            })
+            
+            }
+        }
+        
+    }
+        
+    
+    
 }

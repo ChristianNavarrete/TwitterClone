@@ -7,6 +7,9 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		A93103E21BE5DA110003753D /* UserTimelineViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A93103E11BE5DA110003753D /* UserTimelineViewController.swift */; };
+		A93103E91BE7515F0003753D /* CustomViewHeader.xib in Resources */ = {isa = PBXBuildFile; fileRef = A93103E81BE7515F0003753D /* CustomViewHeader.xib */; };
+		A93103EB1BE751740003753D /* HeaderTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = A93103EA1BE751740003753D /* HeaderTableViewCell.swift */; };
 		A99404EE1BE18FDF00583A52 /* DetailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A99404ED1BE18FDF00583A52 /* DetailViewController.swift */; };
 		A9A1D2611BE2C2150019A329 /* CustomTweetCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = A9A1D2601BE2C2150019A329 /* CustomTweetCell.xib */; };
 		A9A1D2651BE2C2F10019A329 /* CustomTweetCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = A9A1D2641BE2C2F10019A329 /* CustomTweetCell.swift */; };
@@ -35,6 +38,9 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		A93103E11BE5DA110003753D /* UserTimelineViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UserTimelineViewController.swift; sourceTree = "<group>"; };
+		A93103E81BE7515F0003753D /* CustomViewHeader.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = CustomViewHeader.xib; sourceTree = "<group>"; };
+		A93103EA1BE751740003753D /* HeaderTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HeaderTableViewCell.swift; sourceTree = "<group>"; };
 		A99404ED1BE18FDF00583A52 /* DetailViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DetailViewController.swift; sourceTree = "<group>"; };
 		A99404EF1BE1D70E00583A52 /* CodeChallenges.playground */ = {isa = PBXFileReference; lastKnownFileType = file.playground; path = CodeChallenges.playground; sourceTree = "<group>"; };
 		A9A1D2601BE2C2150019A329 /* CustomTweetCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = CustomTweetCell.xib; path = TwitterCF/CustomTweetCell.xib; sourceTree = "<group>"; };
@@ -75,6 +81,15 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		A93103E51BE74DAD0003753D /* Custom Header */ = {
+			isa = PBXGroup;
+			children = (
+				A93103E81BE7515F0003753D /* CustomViewHeader.xib */,
+				A93103EA1BE751740003753D /* HeaderTableViewCell.swift */,
+			);
+			name = "Custom Header";
+			sourceTree = "<group>";
+		};
 		A9A1D2681BE3FCB60019A329 /* Custom Cell */ = {
 			isa = PBXGroup;
 			children = (
@@ -87,6 +102,7 @@
 		A9E80F201BDEBF28004B56C1 = {
 			isa = PBXGroup;
 			children = (
+				A93103E51BE74DAD0003753D /* Custom Header */,
 				A9A1D2681BE3FCB60019A329 /* Custom Cell */,
 				A9E80F2B1BDEBF29004B56C1 /* TwitterCF */,
 				A9E80F411BDEBF29004B56C1 /* TwitterCFTests */,
@@ -109,6 +125,7 @@
 				A9E80F2E1BDEBF29004B56C1 /* AppDelegate.swift */,
 				A9E80F301BDEBF29004B56C1 /* HomeViewController.swift */,
 				A99404ED1BE18FDF00583A52 /* DetailViewController.swift */,
+				A93103E11BE5DA110003753D /* UserTimelineViewController.swift */,
 				A9F8D14C1BE065F400E1F8CB /* Models */,
 				A9E80F321BDEBF29004B56C1 /* Main.storyboard */,
 				A9E80F351BDEBF29004B56C1 /* Images.xcassets */,
@@ -238,6 +255,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				A93103E91BE7515F0003753D /* CustomViewHeader.xib in Resources */,
 				A9E80F341BDEBF29004B56C1 /* Main.storyboard in Resources */,
 				A9E80F391BDEBF29004B56C1 /* LaunchScreen.xib in Resources */,
 				A9A1D2611BE2C2150019A329 /* CustomTweetCell.xib in Resources */,
@@ -262,8 +280,10 @@
 			files = (
 				A9A1D2651BE2C2F10019A329 /* CustomTweetCell.swift in Sources */,
 				A9E80F511BDEC2F4004B56C1 /* TweetJSONParser.swift in Sources */,
+				A93103E21BE5DA110003753D /* UserTimelineViewController.swift in Sources */,
 				A9F8D1471BDFE6BF00E1F8CB /* LoginService.swift in Sources */,
 				A9E80F4F1BDEC227004B56C1 /* Tweet.swift in Sources */,
+				A93103EB1BE751740003753D /* HeaderTableViewCell.swift in Sources */,
 				A9E80F311BDEBF29004B56C1 /* HomeViewController.swift in Sources */,
 				A9E80F2F1BDEBF29004B56C1 /* AppDelegate.swift in Sources */,
 				A9F8D1491BE0388700E1F8CB /* TwitterService.swift in Sources */,

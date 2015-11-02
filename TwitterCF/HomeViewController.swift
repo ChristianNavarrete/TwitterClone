@@ -73,7 +73,6 @@ class HomeViewController: UIViewController, UITableViewDataSource, UITableViewDe
         self.performSegueWithIdentifier("showTweet", sender: self)
 
         
-        
     }
     
     override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {

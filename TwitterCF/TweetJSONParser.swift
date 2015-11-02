@@ -39,8 +39,8 @@ class TweetJSONParser {
                                 // Older code.
                                 
                                 let tweet = Tweet(text : text, id : id)
-                                if let name = user["name"] as? String, profileImageURL = user["profile_image_url"] as? String {
-                                    tweet.user = User(username: name, profileImageURL: profileImageURL)
+                                if let name = user["name"] as? String, profileImageURL = user["profile_image_url"] as? String, userID = user["id"] as? Int, profileBGImage = user["profile_banner_url"] as? String, location = user["location"] as? String{
+                                    tweet.user = User(username: name, profileImageURL: profileImageURL, userID: userID, profileBGImage: profileBGImage, location: location)
                                 }
                                 
                                 tweets.append(tweet)
@@ -86,8 +86,8 @@ class TweetJSONParser {
         }
         
         class func userFromData(user : [String : AnyObject]) -> User? {
-            if let name = user["name"] as? String, profileImageURL = user["profile_image_url"] as? String {
-                return User(username: name,  profileImageURL: profileImageURL)
+            if let name = user["name"] as? String, profileImageURL = user["profile_image_url"] as? String, userID = user["id"] as? Int, profileBGImage = user["profile_background_image_url_https"] as? String, location = user["location"] as? String {
+                return User(username: name,  profileImageURL: profileImageURL, userID:  userID, profileBGImage: profileBGImage, location: location)
             }
             
             return nil
