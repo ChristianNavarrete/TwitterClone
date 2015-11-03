@@ -62,20 +62,7 @@ class UserTimelineViewController: UITableViewController {
     
     
     
-    func grabMaxID() {
-        
-        for tweet in tweets {
-            allTweetIds.append(tweet.id!)
-        }
-        
-        let count = self.allTweetIds.count
-        
-        if let maxID = self.allTweetIds[count - 1] {
-            self.maxID = "\(maxID)"
-        }
-        
-        getMoreTweets()
-    }
+
     
     func getTweets() {
         
