@@ -16,6 +16,7 @@ class HomeViewController: UIViewController, UITableViewDataSource, UITableViewDe
     
     var tweets = [Tweet]()
     var detailTweet = Tweet?()
+    var sinceID = Int?()
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -107,7 +108,8 @@ class HomeViewController: UIViewController, UITableViewDataSource, UITableViewDe
     
     
     func getTweets() {
-        TwitterService.tweetsFromHomeTimeline { (error, tweets) -> () in
+        TwitterService.tweetsFromHomeTimeline(sinceID) { (error, tweets) -> () in
+            
             if let tweets = tweets {
                 self.tweets = tweets
                 self.tableView.reloadData()

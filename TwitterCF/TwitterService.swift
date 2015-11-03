@@ -90,13 +90,12 @@ class TwitterService {
     typealias TweetsCompletion = (String?, [Tweet]?) -> ()
     
     
-    class func tweetsFromHomeTimeline(completion: TweetsCompletion) {
+    class func tweetsFromHomeTimeline(maxID: Int?, completion: TweetsCompletion) {
         
-        var param = [String:AnyObject]()
-        param["count"] = 4
         
-        //in this request we're going to grab the users home timeline
-        let request = SLRequest(forServiceType: SLServiceTypeTwitter, requestMethod: .GET, URL:NSURL(string:"https://api.twitter.com/1.1/statuses/home_timeline.json"), parameters: param)
+        
+        
+        let request = SLRequest(forServiceType: SLServiceTypeTwitter, requestMethod: .GET, URL:NSURL(string:"https://api.twitter.com/1.1/statuses/home_timeline.json"), parameters: nil)
         
         if let account = self.sharedService.account {
             
@@ -113,7 +112,6 @@ class TwitterService {
                 }
                 
                 
-                
                 switch response.statusCode {
                 case 200...299:
                     
@@ -123,26 +121,32 @@ class TwitterService {
                     })
                     
                 case 400...499:
-                completion("ERROR: SLRequest type GET for /1.1/statuses/home_timeline.json returned status code \(response.statusCode) [user input error].", nil)
+                    completion("ERROR: SLRequest type GET for /1.1/statuses/home_timeline.json returned status code \(response.statusCode) [user input error].", nil)
                 case 500...599:
-                completion("ERROR: SLRequest type GET for /1.1/statuses/home_timeline.json returned status code \(response.statusCode) [server side error].", nil)
+                    completion("ERROR: SLRequest type GET for /1.1/statuses/home_timeline.json returned status code \(response.statusCode) [server side error].", nil)
                 default:
-                completion("ERROR: SLRequest type GET for /1.1/statuses/home_timeline.json returned status code \(response.statusCode) [unknown error].", nil)
-                
+                    completion("ERROR: SLRequest type GET for /1.1/statuses/home_timeline.json returned status code \(response.statusCode) [unknown error].", nil)
+                    
                 }
-            
+                
             }
-
+            
         }
         
     }
     
     
-    class func grabFollowerTweets(userID: Int, completion:(String?, [Tweet]?) -> ()) {
+    class func grabFollowerTweets(userID: Int,maxID: Int? = nil, completion:(String?, [Tweet]?) -> ()) {
         
         var param = [String:AnyObject]()
         
         param["user_id"] = "\(userID)"
+        
+        if let maxID = maxID {
+            
+        param["max_id"] = "\(maxID)"
+            
+        }
         
         //in this request we're going to grab the users home timeline
         if let request = SLRequest(forServiceType: SLServiceTypeTwitter, requestMethod: .GET, URL:NSURL(string:"https://api.twitter.com/1.1/statuses/user_timeline.json"), parameters: param) {

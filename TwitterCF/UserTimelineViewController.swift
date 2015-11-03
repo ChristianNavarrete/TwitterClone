@@ -11,12 +11,16 @@ import Social
 
 class UserTimelineViewController: UITableViewController {
     
+    var maxID:Int? = nil
+    
     var tweets = [Tweet]()
+    
     var user : User?
+    var allTweetIds = [AnyObject]()
 
     override func viewDidLoad() {
         super.viewDidLoad()
-        
+
         // self.navigationItem.rightBarButtonItem = self.editButtonItem()
         
         let customTweetCell = UINib(nibName:"CustomTweetCell", bundle: NSBundle.mainBundle())
@@ -53,7 +57,25 @@ class UserTimelineViewController: UITableViewController {
         return 140
     }
     
+    // mark : array extension
     
+    
+    
+    
+    func grabMaxID() {
+        
+        for tweet in tweets {
+            allTweetIds.append(tweet.id!)
+        }
+        
+        let count = self.allTweetIds.count
+        
+        if let maxID = self.allTweetIds[count - 1] {
+            self.maxID = "\(maxID)"
+        }
+        
+        getMoreTweets()
+    }
     
     func getTweets() {
         
@@ -71,6 +93,27 @@ class UserTimelineViewController: UITableViewController {
             }
             
         }        
+    }
+    
+    func getMoreTweets() {
+        
+        let userID = self.user!.userID!
+        
+        TwitterService.grabFollowerTweets (userID, maxID: maxID) { ( error, tweets) -> () in
+            if let tweets = tweets {
+                NSOperationQueue.mainQueue().addOperationWithBlock({ () -> Void in
+                    self.tweets = self.tweets + tweets
+                    self.tableView.reloadData()
+                    print(tweets)
+                    
+                })
+                
+                
+
+                
+            }
+            
+        }
     }
 
 
